@@ -1,0 +1,39 @@
+version: '2'
+services:
+  couchdb:
+    image: klaemo/couchdb:1.6.1
+    ports:
+      - 5984
+    volumes:
+      - /data/couchdb/local.d:/usr/local/etc/couchdb/local.d
+      - /data/couchdb/data:/opt/couchdb/data
+  mqtt:
+    image: aabrook/mqtt
+    ports:
+      - 1883
+    volumes:
+      - /data/mqtt/conf.d:/etc/mosquitto/conf.d
+  subscribers:
+    image: aabrook/mqtt-subscribers
+    links:
+      - couchdb
+      - mqtt
+    volumes:
+      - /data/subscribers:/code/private
+  nginx:
+    image: nginx
+    links:
+      - deployer
+    ports:
+      - 80:80
+    volumes:
+      - /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - /data/nginx/conf/htpasswd:/etc/nginx/htpasswd
+  deployer:
+    image: aabrook/deployer
+    ports:
+      - 3000
+    volumes:
+      - /data/mqtt/conf.d:/data/mqtt/conf.d
+      - /data/couchdb/local.d:/usr/local/etc/couchdb
+      - /data/subscribers:/code/private
