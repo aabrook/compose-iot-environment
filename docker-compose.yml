@@ -19,7 +19,7 @@ services:
       - couchdb
       - mqtt
     volumes:
-      - /data/subscribers:/code/private
+      - /data/subscribers:/code
   nginx:
     image: nginx
     links:
@@ -35,5 +35,6 @@ services:
       - 3000
     volumes:
       - /data/mqtt/conf.d:/data/mqtt/conf.d
-      - /data/couchdb/local.d:/usr/local/etc/couchdb
-      - /data/subscribers:/code/private
+      - /data/couchdb/local.d:/data/couchdb/local.d
+      - /data/subscribers:/data/subscribers
+      - /data/nginx/conf:/data/nginx/conf
