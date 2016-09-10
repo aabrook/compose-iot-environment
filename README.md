@@ -21,7 +21,7 @@ getting it online should improve stability. [aabrook/mqtt-subscribers](https://g
 
 ## Deployer
 
-A service that will pull/clown repositories and run an embedded script. Used to simplify CD. [aabrook/deployer](https://github.com/aabrook/deployer)
+A service that will pull/clone repositories and run an embedded script. Used to simplify CD. [aabrook/deployer](https://github.com/aabrook/deployer)
 
 ## nginx
 
