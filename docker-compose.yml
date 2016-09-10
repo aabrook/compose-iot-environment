@@ -10,7 +10,7 @@ services:
   mqtt:
     image: aabrook/mqtt
     ports:
-      - 1883
+      - 1883:1883
     volumes:
       - /data/mqtt/conf.d:/etc/mosquitto/conf.d
   subscribers:
